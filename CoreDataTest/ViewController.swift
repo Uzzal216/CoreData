@@ -12,8 +12,10 @@ import CoreData
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var showDataTextView: UITextView!
     @IBOutlet weak var nameTextView: UITextField!
     @IBOutlet weak var ageTextView: UITextField!
+    var textFieldString : String = ""
     var people = [People]()
     
     override func viewDidLoad() {
@@ -41,14 +43,17 @@ class ViewController: UIViewController {
     
     func showAllPerson() {
         
+        textFieldString = ""
         let fetchRequest : NSFetchRequest<People> = People.fetchRequest()
         
         do {
             let people = try PersistenceService.context.fetch(fetchRequest)
             self.people = people
             for item in people {
-                print(item.name as Any)
+                print("Name: \(item.name as Any) \nAge: \(item.age as Any)")
+                self.textFieldString += "Name: " + item.name! + ": " + "Age: " + String(item.age) + "\n"
             }
+            showDataTextView.text = textFieldString
             
         } catch {
             print("Failed to fetch")
