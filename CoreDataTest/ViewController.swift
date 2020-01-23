@@ -41,6 +41,7 @@ class ViewController: UIViewController {
         
     }
     
+    // Function for fetching and showing data
     func showAllPerson() {
         
         textFieldString = ""
@@ -51,8 +52,12 @@ class ViewController: UIViewController {
             self.people = people
             for item in people {
                 print("Name: \(item.name as Any) \nAge: \(item.age as Any)")
+                
+                // Appending to the string
                 self.textFieldString += "Name: " + item.name! + ": " + "Age: " + String(item.age) + "\n"
             }
+            
+            // Show in textview
             showDataTextView.text = textFieldString
             
         } catch {
