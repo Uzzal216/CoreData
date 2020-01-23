@@ -19,19 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        showAllPerson()
         
-        let fetchRequest : NSFetchRequest<People> = People.fetchRequest()
-        
-        do {
-            let people = try PersistenceService.context.fetch(fetchRequest)
-            self.people = people
-            for item in people {
-                print(item.name as Any)
-            }
-            
-        } catch {
-            
-        }
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
@@ -46,8 +35,24 @@ class ViewController: UIViewController {
         person.age = Int16(age!)!
         PersistenceService.saveContext()
         print("From DB - ")
+        showAllPerson()
         
+    }
+    
+    func showAllPerson() {
         
+        let fetchRequest : NSFetchRequest<People> = People.fetchRequest()
+        
+        do {
+            let people = try PersistenceService.context.fetch(fetchRequest)
+            self.people = people
+            for item in people {
+                print(item.name as Any)
+            }
+            
+        } catch {
+            print("Failed to fetch")
+        }
     }
 }
 
