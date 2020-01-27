@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  CoreDataTest
-//
-//  Created by Sudipto Roy on 1/23/20.
-//  Copyright © 2020 Code-X Systems. All rights reserved.
-//
 
 import UIKit
 import CoreData
@@ -15,6 +8,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var showDataTextView: UITextView!
     @IBOutlet weak var nameTextView: UITextField!
     @IBOutlet weak var ageTextView: UITextField!
+    
     var textFieldString : String = ""
     var people = [People]()
     

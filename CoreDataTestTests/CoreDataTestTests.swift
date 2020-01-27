@@ -1,10 +1,3 @@
-//
-//  CoreDataTestTests.swift
-//  CoreDataTestTests
-//
-//  Created by Sudipto Roy on 1/23/20.
-//  Copyright © 2020 Code-X Systems. All rights reserved.
-//
 
 import XCTest
 @testable import CoreDataTest
