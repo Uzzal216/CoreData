@@ -8,6 +8,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var showDataTextView: UITextView!
     @IBOutlet weak var nameTextView: UITextField!
     @IBOutlet weak var ageTextView: UITextField!
+    @IBOutlet weak var textfld: UITextField!
     
     var textFieldString : String = ""
     var people = [People]()
@@ -58,5 +59,47 @@ class ViewController: UIViewController {
             print("Failed to fetch")
         }
     }
+    
+    //// Function for deleting data
+    
+    @IBAction func dltBtn(_ sender: Any) {
+        deleteData()
+        showAllPerson()
+    }
+        func deleteData(){
+            
+           guard (UIApplication.shared.delegate as? AppDelegate) != nil else { return }
+            
+            let managedContext = PersistenceService.persistentContainer.viewContext
+            //appDelegate.persistentContainer.viewContext
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+            
+            let deleteText = textfld.text
+            
+            fetchRequest.predicate = NSPredicate(format: "name = %@", deleteText!)
+            do{
+                let people = try managedContext.fetch(fetchRequest)
+                
+                for person in people{
+                    let objectToDelete = person as! NSManagedObject
+                    managedContext.delete(objectToDelete)
+                }
+                
+                print("Deleted item : ", people)
+                
+                do{
+                    try managedContext.save()
+                }
+                catch{
+                    print(error)
+                }
+            } catch {
+                print(error)
+         
+            }
+        }
+    
+    
 }
 
